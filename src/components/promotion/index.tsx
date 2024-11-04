@@ -21,7 +21,7 @@ const PromotionContainer = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.select_container}>
-        <p>แพ็คแก็จทั้งหมด</p>
+        <p>แพ็คเก็จทั้งหมด</p>
         <div
           onClick={() => {
             createPromotion();
