@@ -44,6 +44,7 @@
   justify-content: flex-end;
   align-items:center;
   padding-right: 24px;
+  padding-bottom: 24px;
 }
 .select_container > p {
   font-size: 24px;
@@ -75,7 +76,12 @@
   width: calc(100% - 0rem);
 }
 
-
+.card_container {
+  width: 100%;
+  background-color: #ffff;
+  border-radius: 24px;
+  padding: 24px;
+}
 
 @media screen and (max-width: 767px) {
   .cards {
