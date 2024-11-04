@@ -62,19 +62,19 @@ export const useDashboard = () => {
     {
       id: 1,
       title: "จำนวนรถทั้งหมด",
-      total: carAmount + "  คัน" + " ของเดือน" + getMonthName(month - 1),
+      total: carAmount + "  คัน" + " ของเดือน" + getMonthName(month),
       icons: <FaCarSide size={48} />,
     },
     {
       id: 2,
       title: "จำนวนรายได้ทั้งหมด",
-      total: inCome + "  บาท" + " ของเดือน" + getMonthName(month - 1),
+      total: inCome + "  บาท" + " ของเดือน" + getMonthName(month),
       icons: <GiMoneyStack size={48} />,
     },
   ];
 
   const handledMonth = (values: number) => {
-    setmonth(values + 1);
+    setmonth(values);
   };
   const handledYearChange = (year: number) => {
     setyear(year);

@@ -12,6 +12,7 @@ import { PROMOTION_MODAL_STATE } from "../modals/promotion/promotionModal.utils"
 import useModal from "@/hooks/useModal";
 import { setLayout } from "@/redux/slices/layout/layoutSlice";
 import { PACKAGE_TYPE } from "@/redux/slices/promotion/proMotion.utils";
+import { Dropdown, Menu, MenuProps } from "antd";
 
 export const usePromotion = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ export const usePromotion = () => {
   const [modalState, setModalState] = useState<PROMOTION_MODAL_STATE>(
     PROMOTION_MODAL_STATE.DELETE
   );
+
   const [promotionName, setProMotionName] = useState<string>();
   const [promotion, setProMotion] = useState<PromotionTableColumns>({
     id: "",
@@ -68,6 +70,16 @@ export const usePromotion = () => {
   useEffect(() => {
     dispatch(getProMotionTable(() => {}));
   }, []);
+
+  const handleMenuClick = (
+    info: PromotionTableColumns,
+    action: PROMOTION_MODAL_STATE
+  ) => {
+    setProMotionName(info.package);
+    setProMotion(info);
+    setModalState(action);
+    openModal();
+  };
 
   const columns = useMemo(
     () => [
@@ -128,37 +140,49 @@ export const usePromotion = () => {
         header: "ประเภท",
         size: 100,
       }),
+
       columnHelper.accessor("action", {
         header: "ดำเนินการ",
-        cell: (info) => (
-          <div className={styles.action}>
-            <SvgIcon icon="orderAction" width={24} height={24} />
-            <div className={styles.dropdown}>
-              <ul>
-                <li
-                  onClick={() => {
-                    setProMotionName(info.row.original.package);
-                    setProMotion(info.row.original);
-                    setModalState(PROMOTION_MODAL_STATE.EDIT);
-                    openModal();
-                  }}
-                >
-                  แก้ไขแพ็คแกจ
-                </li>
-                <li
-                  onClick={() => {
-                    setProMotionName(info.row.original.package);
-                    setProMotion(info.row.original);
-                    setModalState(PROMOTION_MODAL_STATE.DELETE);
-                    openModal();
-                  }}
-                >
-                  ลบแพ็คแกจ
-                </li>
-              </ul>
-            </div>
-          </div>
-        ),
+        cell: (info) => {
+          const menu = (
+            <Menu>
+              <Menu.Item
+                key="edit"
+                onClick={() =>
+                  handleMenuClick(info.row.original, PROMOTION_MODAL_STATE.EDIT)
+                }
+              >
+                แก้ไขแพ็คแกจ
+              </Menu.Item>
+              <Menu.Item
+                key="delete"
+                onClick={() =>
+                  handleMenuClick(
+                    info.row.original,
+                    PROMOTION_MODAL_STATE.DELETE
+                  )
+                }
+              >
+                ลบแพ็คแกจ
+              </Menu.Item>
+            </Menu>
+          );
+
+          return (
+            <Dropdown
+              overlay={menu}
+              trigger={["click"]}
+              placement="bottomRight"
+            >
+              <div
+                className={styles.action}
+                onClick={(e) => e.preventDefault()}
+              >
+                <SvgIcon icon="orderAction" width={24} height={24} />
+              </div>
+            </Dropdown>
+          );
+        },
         size: 90,
       }),
     ],
