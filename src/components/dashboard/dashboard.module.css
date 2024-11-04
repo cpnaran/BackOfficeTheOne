@@ -2,11 +2,12 @@
   display: flex;
   /* Use flexbox layout */
   /* Allow items to wrap onto multiple lines */
-  gap: 1rem;
+    gap: 24px;
   /* Optional: Add space between cards */
   justify-content: center;
   margin-top: 100px;
   margin-left: 20px;
+    margin-right: 20px;
   flex-direction: column;
 }
 
@@ -21,7 +22,6 @@
     display: flex;
     justify-content: space-between;
     gap: 24px;
-    padding: 24px;
    
 }
 
@@ -30,7 +30,6 @@
   display: flex;
   justify-content: center;
   gap: 24px;
-  padding: 24px;
 
 }
 .side {
