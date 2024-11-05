@@ -26,7 +26,7 @@ const CreatPromotionFrom = ({
           type="text"
           id="name"
           name="name"
-          placeholder="ชื่อแพ็คแก็จ"
+          placeholder="ชื่อแพ็คเกจ"
           className={styles.inputstyle}
         />
 
