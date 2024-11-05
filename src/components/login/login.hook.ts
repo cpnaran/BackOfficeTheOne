@@ -34,6 +34,8 @@ export const useLoginPage = () => {
             draggable: true,
             progress: undefined,
           });
+      }else {
+       router.push("/dashboard");
       }
     }));
   };

@@ -32,8 +32,8 @@ export const useLayout = () => {
     } else {
       // ถ้าไม่มี savedUser เปลี่ยนเส้นทางไปที่หน้าล็อกอิน
       router.push("/login");
-    }
-  }, [token,savedUser]);
+    } 
+  }, [savedUser]);
 
   return {
     header,
