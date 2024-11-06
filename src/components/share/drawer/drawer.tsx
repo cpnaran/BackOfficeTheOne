@@ -14,6 +14,8 @@ const DrawerContainer = ({ open, onClose }: DrawertypeProps) => {
       placement={"left"}
       open={open}
       key={"left"}
+      maskClosable={true} // Enable close on outside click
+      onClose={onClose}
       closeIcon={
         <IoIosArrowForward
           style={{
