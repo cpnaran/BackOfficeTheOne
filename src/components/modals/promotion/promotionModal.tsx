@@ -11,7 +11,6 @@ import { usePromotionModal } from "./promotionModal.hooks";
 const PromotionModal = ({
   isModalOpen,
   closeModal,
-  onSubmit,
   status,
   name,
   promotion,

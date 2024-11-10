@@ -1,11 +1,11 @@
 .container{
-    background-color: var(--white-color);
+    background-color: var(--grey-color);
     padding: 20px;
     border-radius: 10px;
-    display: flex;
+    /* display: flex; */
     gap: 20px;
-    justify-content: center;
-    cursor: pointer;
+    /* justify-content: center; */
+    /* cursor: pointer; */
     height: fit-content;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
 }
@@ -16,22 +16,23 @@
     justify-content: center;
     gap: 20px;
 }
+
 .number {
     font-size: 24px;
     font-weight: bold;
-    color: var(--secondary-text-color);
+    color: var(--text-color);
 }
 
 .detail {
     font-size: 24px;
     font-weight: 300;
-    color: var(--secondary-text-color);
+    color: var(--text-color);
 }
 
 .title {
     font-size: 36px;
     font-weight: 500;
-    color: var(--secondary-text-color);
+    color: var(--text-color);
 }
 
 .positive {
@@ -40,4 +41,28 @@
 
 .negative {
     color: var(--error-color-1);
+}
+
+
+.hr_line {
+    border: none;
+    border-top: 2px solid var(--grey-color); /* เปลี่ยนสีได้ตามต้องการ */
+    padding: 12px;
+    width: 100%; /* กำหนดความยาวเส้น */
+  }
+
+
+
+.displayTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.iconDiv {
+    display: flex;
+    padding: 10px;
+   border-radius:9999px;
+   background-color: var(--green-color-1);
+   align-items: center;
 }

@@ -14,7 +14,6 @@ const PromotionContainer = () => {
     modalState,
     promotion,
     closeModal,
-    openModal,
     createPromotion,
     loading,
   } = usePromotion();

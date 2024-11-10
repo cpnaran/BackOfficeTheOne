@@ -1,6 +1,7 @@
 .container {
-    width: 0;
-    height: 0;
+    width: 320px;
+    @apply h-auto;
+   
     transition: 0.5s;
     overflow: hidden;
     background-color: var(--sidbar-color);
@@ -68,10 +69,7 @@ background-color: var(--sidbar-color);
 @media screen and (min-width: 768px) {}
 
 @media screen and (min-width: 1024px) {
-    .container {
-        width: 320px;
-        @apply h-auto;
-    }
+   
 }
 
 @media screen and (min-width: 3840px) {}

@@ -12,7 +12,7 @@ import { PROMOTION_MODAL_STATE } from "../modals/promotion/promotionModal.utils"
 import useModal from "@/hooks/useModal";
 import { setLayout } from "@/redux/slices/layout/layoutSlice";
 import { PACKAGE_TYPE } from "@/redux/slices/promotion/proMotion.utils";
-import { Dropdown, Menu, MenuProps } from "antd";
+import { Dropdown, Menu,} from "antd";
 
 export const usePromotion = () => {
   const dispatch = useAppDispatch();
