@@ -50,7 +50,7 @@
     display: flex;
     /* Use flexbox layout */
     /* Allow items to wrap onto multiple lines */
-    gap: 1rem;
+    gap: 24px;
     /* Optional: Add space between cards */
     justify-content: center;
     margin-top: 100px;
@@ -59,4 +59,6 @@
     margin-bottom: 150px;
     flex-direction: column;
   }
+  
+
   

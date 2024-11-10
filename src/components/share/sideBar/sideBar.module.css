@@ -1,14 +1,12 @@
 .container {
-    width: 0;
-    height: 0;
     transition: 0.5s;
     overflow: hidden;
     background-color: var(--sidbar-color);
-
+    @apply h-auto;
 }
 
 .container .user {
-background-color: var(--sidbar-color);
+    background-color: var(--sidbar-color);
     color: var(--white-color);
     height: 64px;
     @apply w-full flex justify-center items-center;
@@ -63,15 +61,18 @@ background-color: var(--sidbar-color);
     @apply w-full;
 }
 
-@media screen and (max-width: 767px) {}
+@media screen and (max-width: 767px) {
+    .container {
+            display: none;
+        }
+}
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+   
+}
 
 @media screen and (min-width: 1024px) {
-    .container {
-        width: 320px;
-        @apply h-auto;
-    }
+ 
 }
 
 @media screen and (min-width: 3840px) {}

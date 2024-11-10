@@ -62,14 +62,14 @@ export const useDashboard = () => {
     {
       id: 1,
       title: "จำนวนรถทั้งหมด",
-      total: carAmount + "  คัน" + " ของเดือน" + getMonthName(month),
-      icons: <FaCarSide size={48} />,
+      total: carAmount + "  คัน"  ,
+      icons: <FaCarSide size={48} color="white"/>,
     },
     {
       id: 2,
       title: "จำนวนรายได้ทั้งหมด",
       total: inCome + "  บาท" + " ของเดือน" + getMonthName(month),
-      icons: <GiMoneyStack size={48} />,
+      icons: <GiMoneyStack size={48} color="white"/>,
     },
   ];
 
