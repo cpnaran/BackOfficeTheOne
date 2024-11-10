@@ -8,7 +8,11 @@ const Layout: React.FC<LayoutContainerProps> = ({ children }) => {
   return (
     <div className={styles.container}>
       <main>
-        {sidebar && <SidebarMain asPath={asPath} pathname={pathname} />}
+        {sidebar && (
+          <div className={styles.sidebar}>
+            <SidebarMain asPath={asPath} pathname={pathname} />
+          </div>
+        )}
         <div
           className={
             pathname == "/login" ? styles.contentLogin : styles.content

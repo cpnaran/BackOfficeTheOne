@@ -46,7 +46,7 @@
 
 .hr_line {
     border: none;
-    border-top: 2px solid var(--grey-color); /* เปลี่ยนสีได้ตามต้องการ */
+    border-top: 2px solid var(--sidbar-color); /* เปลี่ยนสีได้ตามต้องการ */
     padding: 12px;
     width: 100%; /* กำหนดความยาวเส้น */
   }

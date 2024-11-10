@@ -12,7 +12,8 @@ import { PROMOTION_MODAL_STATE } from "../modals/promotion/promotionModal.utils"
 import useModal from "@/hooks/useModal";
 import { setLayout } from "@/redux/slices/layout/layoutSlice";
 import { PACKAGE_TYPE } from "@/redux/slices/promotion/proMotion.utils";
-import { Dropdown, Menu,} from "antd";
+import { Dropdown, Menu } from "antd";
+import { FiMoreVertical } from "react-icons/fi";
 
 export const usePromotion = () => {
   const dispatch = useAppDispatch();
@@ -178,7 +179,7 @@ export const usePromotion = () => {
                 className={styles.action}
                 onClick={(e) => e.preventDefault()}
               >
-                <SvgIcon icon="orderAction" width={24} height={24} />
+                <FiMoreVertical />
               </div>
             </Dropdown>
           );

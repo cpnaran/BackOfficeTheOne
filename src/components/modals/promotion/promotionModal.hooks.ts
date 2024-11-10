@@ -116,9 +116,9 @@ export const usePromotionModal = (
     dispatch(
       editPackage(request, (check) => {
         if (check) {
-          dispatch(getProMotionTable(() => {}));
-          closeModal();
-             toast.success("แก้ไขแพ็คเก็จเรียบร้อย", {
+            closeModal();
+            dispatch(getProMotionTable(() => {}));
+            toast.success("แก้ไขแพ็คเก็จเรียบร้อย", {
             position: "top-right", // You can change position as needed
             autoClose: 5000, // Auto close after 5 seconds
             hideProgressBar: false,
