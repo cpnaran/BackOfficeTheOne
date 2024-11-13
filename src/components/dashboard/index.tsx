@@ -1,4 +1,3 @@
-
 import Card from "../share/card/card";
 import { useDashboard } from "./dashboard.hooks";
 import styles from "./dashboard.module.css";
@@ -7,6 +6,7 @@ import { Select } from "antd";
 import AreaCarChart from "../share/chart/AreaCharts/areaChartsCar";
 import PeakTimeChart from "../share/chart/AreaCharts/areaChartsTime";
 import LoadingScreen from "../loadingScreen/loading";
+import StackedBarChart from "../share/chart/BarCharts/barCharts";
 
 const DashBoardPageContainer: React.FC = () => {
   const {
@@ -21,6 +21,7 @@ const DashBoardPageContainer: React.FC = () => {
     graphCar,
     graphTime,
     loading,
+    summaryPackages,
   } = useDashboard();
   return (
     <div className={styles.wrapper}>
@@ -51,15 +52,7 @@ const DashBoardPageContainer: React.FC = () => {
         </div>
         <div className={styles.cards}>
           {cards.map((item) => (
-            <Card
-              item={item}
-              key={item.id}
-              className={
-              
-                   styles["w-100"]
-                 
-              }
-            />
+            <Card item={item} key={item.id} className={styles["w-100"]} />
           ))}
         </div>
       </div>
@@ -81,6 +74,9 @@ const DashBoardPageContainer: React.FC = () => {
           year={year}
           handleYearChange={handledYearChange}
         />
+      </div>
+      <div className={styles.chartContentTime}>
+        <StackedBarChart graph={summaryPackages} />
       </div>
       {loading && <LoadingScreen />}
     </div>

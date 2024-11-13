@@ -90,7 +90,7 @@ const PeakTimeChart = ({ graph }: GraphTimeContainerProps) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerTime}>
       <ReactApexChart
         options={options}
         series={series}
