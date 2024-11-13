@@ -7,6 +7,7 @@ import {
   getTotalCar,
 } from "@/redux/slices/dashboard/dashboardActions";
 import { setLayout } from "@/redux/slices/layout/layoutSlice";
+import { getPackagesSummary } from "@/redux/slices/packagesummary/packagesSummaryActions";
 import { RootState, useAppDispatch } from "@/redux/store";
 import {
   GraphRequest,
@@ -35,6 +36,9 @@ export const useDashboard = () => {
     (state: RootState) => state.dashboard.carAmount
   );
   const inCome = useSelector((state: RootState) => state.dashboard.income);
+  const summaryPackages = useSelector(
+    (state: RootState) => state.packageSummary.packageSummary
+  );
   const getMonthName = (month: number): string => {
     const monthNames = [
       "มกราคม", // 0
@@ -62,14 +66,14 @@ export const useDashboard = () => {
     {
       id: 1,
       title: "จำนวนรถทั้งหมด",
-      total: carAmount + "  คัน"  ,
-      icons: <FaCarSide size={48} color="white"/>,
+      total: carAmount + "  คัน",
+      icons: <FaCarSide size={48} color="white" />,
     },
     {
       id: 2,
       title: "จำนวนรายได้ทั้งหมด",
       total: inCome + "  บาท" + " ของเดือน" + getMonthName(month),
-      icons: <GiMoneyStack size={48} color="white"/>,
+      icons: <GiMoneyStack size={48} color="white" />,
     },
   ];
 
@@ -94,7 +98,9 @@ export const useDashboard = () => {
     const request: GraphRequest = {
       year: year.toString(),
     };
+
     dispatch(getGraph(request, () => {}));
+    dispatch(getPackagesSummary(request, () => {}));
   }, [year]);
 
   useEffect(() => {
@@ -129,5 +135,6 @@ export const useDashboard = () => {
     yearCar,
     cards,
     graphTime,
+    summaryPackages,
   };
 };
