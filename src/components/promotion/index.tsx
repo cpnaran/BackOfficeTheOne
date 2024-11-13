@@ -29,7 +29,11 @@ const PromotionContainer = () => {
           <SvgIcon icon="plus" width={24} height={24} />
         </div>
       </div>
-      <DataTable values={packageTableData} columns={columns} />
+      <DataTable
+        values={packageTableData}
+        columns={columns}
+        columnPinning={{ left: [], right: ["action"] }}
+      />
 
       {isOpen && (
         <PromotionModal
