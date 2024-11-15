@@ -1,7 +1,8 @@
 export interface LoginState {
   error: string | null;
   loading: boolean;
-  token:string|null
+  token:string|null;
+  refresh_token: string|null;
  
 }
 

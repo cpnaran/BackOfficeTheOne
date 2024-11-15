@@ -1,18 +1,23 @@
-import axios, { AxiosInstance,  AxiosResponse, AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosRequestHeaders } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+  AxiosRequestHeaders,
+} from "axios";
 
 import { camelizeKeys, snakeCaseKeys } from "./api.utils";
 import session from "@/utils/session";
 import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "@/redux/store";
+import { refreshAccessToken } from "@/redux/slices/login/loginActions";
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 
 class ApiClient {
   private http: AxiosInstance;
-   
-  constructor(
-    baseURL: string = `${apiBaseUrl}`,
-    timeout: number = 30000
-  ) {
+
+  constructor(baseURL: string = `${apiBaseUrl}`, timeout: number = 30000) {
     this.http = axios.create({
       baseURL,
       timeout,
@@ -21,30 +26,28 @@ class ApiClient {
       },
     });
 
-    this.http.interceptors.request.use(
-      async (config) => ({
-        ...config,
-           headers: await this.prepareRequestHeaders(config.headers), 
-        data: this.prepareRequestBody(config.data, config.params),
-        params: this.prepareRequestParams(config.params),
-      }),
-     
-    );
+    this.http.interceptors.request.use(async (config) => ({
+      ...config,
+      headers: await this.prepareRequestHeaders(config.headers),
+      data: this.prepareRequestBody(config.data, config.params),
+      params: this.prepareRequestParams(config.params),
+    }));
 
-   this.http.interceptors.request.use(
+    this.http.interceptors.request.use(
       async (config) => {
-       
         const savedUser = session.getKeyStorage("user");
         let accessToken = session.getKeyStorage("accessToken");
+        let refreshToken = session.getKeyStorage("refresh_token")
 
-        if ( accessToken) {
+        if (accessToken) {
           const decodedToken = jwtDecode(accessToken);
           const currentTime = Date.now() / 1000; // แปลงเวลาเป็นหน่วยวินาที
-
           // ตรวจสอบว่า Access Token หมดอายุหรือไม่
+ 
           if (decodedToken.exp && decodedToken.exp < currentTime) {
             try {
-                session.clearLogout(); // รีเฟรช Access Token
+             config.headers.Authorization = ` ${refreshToken}`;
+              accessToken =  await refreshAccessToken()  as string;
             } catch (error) {
               session.clearLogout();
               return Promise.reject(error);
@@ -52,11 +55,9 @@ class ApiClient {
           }
           // ตั้งค่า Authorization header ใหม่
           config.headers.Authorization = ` ${accessToken}`;
-          
         }
-            
-    return config;
-  
+
+        return config;
       },
       (error) => {
         return Promise.reject(error);
@@ -67,9 +68,6 @@ class ApiClient {
       (error) => this.handleError(error)
     );
   }
-
-
-
 
   private prepareRequestBody = (data: any, params: any) => {
     if (data) {
@@ -91,13 +89,12 @@ class ApiClient {
   private prepareRequestParams = (params: any) => {
     if (!params) return;
     return camelizeKeys(params);
- 
   };
 
- private prepareResponseData(data: any) {
+  private prepareResponseData(data: any) {
     return camelizeKeys(data);
   }
-private prepareRequestHeaders(headers: AxiosRequestHeaders) {
+  private prepareRequestHeaders(headers: AxiosRequestHeaders) {
     return session.setHeader(headers);
   }
 
@@ -111,7 +108,6 @@ private prepareRequestHeaders(headers: AxiosRequestHeaders) {
     return Promise.reject({ ...e, message });
   };
 
- 
   onValidateFailed(e: any) {
     const { response } = e;
     if (response?.data?.errors && Array.isArray(response?.data?.errors)) {
@@ -141,8 +137,6 @@ private prepareRequestHeaders(headers: AxiosRequestHeaders) {
       "การเชื่อมต่อกับเซิฟเวอร์มีปัญหา กรุณาลองใหม่อีกครั้งภายหลัง"
     );
   }
-
- 
 
   onUnauthorized(e: any) {
     const { response } = e;
@@ -183,7 +177,7 @@ private prepareRequestHeaders(headers: AxiosRequestHeaders) {
   }
 
   public get(path: string, params?: any, config?: AxiosRequestConfig) {
-    console.log(path,"path")
+    console.log(path, "path");
     const requestData = {
       ...config,
       params: {
