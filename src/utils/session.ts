@@ -13,12 +13,10 @@ const saveKeyStorage = (key: string, value: string) => {
 };
 
 const getKeyStorage = (key: string) => {
-      if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
-    const item = localStorage.getItem(key) || "";
+  const item = localStorage.getItem(key) || "";
     return item;
-  }
-  return ""; 
 };
+
 
 const removeKeyStorage = (key: string) => {
   return localStorage.removeItem(key);

@@ -1,7 +1,7 @@
 import api from "@/api";
 import { AppThunk } from "@/redux/store";
 import { getTableProMotionStart, getTableProMotionSuccess, getTableProMotionFailure } from "../promotion/proMotionSlice";
-import { loginFailure, loginStart, loginSuccess } from "./loginSlice";
+import { loginFailure, loginStart, loginSuccess, refreshStart, refreshSuccess } from "./loginSlice";
 import session from "@/utils/session";
 import { LoginRequest } from "@/redux/types/loginSlice.types";
 
@@ -17,9 +17,10 @@ export const login=
             password: request.password,
           },
          );
-          const { token } = response.data;
-         session.saveKeyStorage("user", JSON.stringify(response.data));
+          const { token, refreshToken } = response.data;
+          session.saveKeyStorage("user", JSON.stringify(response.data));
           session.saveAccessToken(token);
+          session.saveKeyStorage("refresh_token", refreshToken);
       dispatch(loginSuccess(response.data));
       callback(true);
     } catch (error: any) {
@@ -30,3 +31,30 @@ export const login=
       callback(false);
     }
   };
+
+let refreshPromise: Promise<string> | null = null;
+let isRefreshing = false;
+
+export const refreshAccessToken = () => {
+  if (!isRefreshing) {
+    refreshPromise = new Promise((resolve, reject) => {
+      api.post(`${apiBaseUrl}/Login/refresh`,
+      )
+        .then((response) => {
+        const {token} = response.data
+          session.saveAccessToken(token);
+          session.saveKeyStorage("user", JSON.stringify(response.data));
+          resolve(token);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+        .finally(() => {
+          isRefreshing = false;
+        });
+    });
+  }
+  
+  return refreshPromise;
+};
+

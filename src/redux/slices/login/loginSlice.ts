@@ -19,6 +19,18 @@ const loginSlice = createSlice({
       state.loading = false;
       state.error = action.payload || "An error occurred.";
     },
+    refreshStart: (state) =>{
+      state.loading =true;
+      state.error = null;
+    },
+    refreshSuccess: (state,action: PayloadAction<string>) => {
+      state.loading = false;
+      state.refresh_token = action.payload
+    },
+     refreshFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload || "An error occurred.";
+    },
   }
    
 });
@@ -26,7 +38,10 @@ const loginSlice = createSlice({
 export const {
  loginStart,
  loginSuccess,
-loginFailure
+ loginFailure,
+ refreshStart,
+ refreshSuccess,
+ refreshFailure,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;
