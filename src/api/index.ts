@@ -35,18 +35,26 @@ class ApiClient {
 
     this.http.interceptors.request.use(
       async (config) => {
+
+        if (
+          config.url &&
+          
+          (config.url.includes("/Login/refresh") )
+        ) {
+          let refreshToken = session.getKeyStorage("refresh_token")
+           config.headers.Authorization = ` ${refreshToken}`;
+          return config;
+        }
         const savedUser = session.getKeyStorage("user");
         let accessToken = session.getKeyStorage("accessToken");
-        let refreshToken = session.getKeyStorage("refresh_token")
+       
 
+         
         if (accessToken) {
           const decodedToken = jwtDecode(accessToken);
           const currentTime = Date.now() / 1000; // แปลงเวลาเป็นหน่วยวินาที
-          // ตรวจสอบว่า Access Token หมดอายุหรือไม่
- 
-          if (decodedToken.exp && decodedToken.exp < currentTime) {
+          if (decodedToken.exp && decodedToken.exp > currentTime) {
             try {
-             config.headers.Authorization = ` ${refreshToken}`;
               accessToken =  await refreshAccessToken()  as string;
             } catch (error) {
               session.clearLogout();
@@ -140,6 +148,7 @@ class ApiClient {
 
   onUnauthorized(e: any) {
     const { response } = e;
+    session.clearLogout();
     return this.alertMessage(e, response?.data.message, false);
   }
 

@@ -37,9 +37,9 @@ let isRefreshing = false;
 
 export const refreshAccessToken = () => {
   if (!isRefreshing) {
-    isRefreshing = true;
     refreshPromise = new Promise((resolve, reject) => {
-      api.post(`${apiBaseUrl}/Login/refresh`)
+      api.post(`${apiBaseUrl}/Login/refresh`,
+      )
         .then((response) => {
         const {token} = response.data
           session.saveAccessToken(token);
@@ -54,6 +54,7 @@ export const refreshAccessToken = () => {
         });
     });
   }
+  
   return refreshPromise;
 };
 
