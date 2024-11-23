@@ -1,6 +1,6 @@
 import { PromotionTableColumns } from "@/components/promotion/promotion.types";
 import { CreatePromotionFormKeysProps } from "../from/createPromotion.from.types";
-import { useEffect, useMemo } from "react";
+import {  useMemo } from "react";
 import { useAppDispatch } from "@/redux/store";
 import {
   addPackage,
@@ -44,8 +44,8 @@ export const usePromotionModal = (
     dispatch(
       addPackage(request, (check) => {
         if (check) {
-          dispatch(getProMotionTable(() => {}));
           closeModal();
+          dispatch(getProMotionTable(() => {}));
            toast.success("เพิ่มแพ็คเก็จเรียบร้อย", {
             position: "top-right", // You can change position as needed
             autoClose: 5000, // Auto close after 5 seconds
@@ -116,9 +116,9 @@ export const usePromotionModal = (
     dispatch(
       editPackage(request, (check) => {
         if (check) {
-          dispatch(getProMotionTable(() => {}));
-          closeModal();
-             toast.success("แก้ไขแพ็คเก็จเรียบร้อย", {
+            closeModal();
+            dispatch(getProMotionTable(() => {}));
+            toast.success("แก้ไขแพ็คเก็จเรียบร้อย", {
             position: "top-right", // You can change position as needed
             autoClose: 5000, // Auto close after 5 seconds
             hideProgressBar: false,
@@ -141,7 +141,7 @@ export const usePromotionModal = (
       })
     );
   };
-  editPackage;
+
   return {
     promotionInitialValues,
     handleAddPromotion,

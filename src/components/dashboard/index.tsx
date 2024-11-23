@@ -1,21 +1,18 @@
-import { DEVICE_TYPE } from "@/utils/type";
 import Card from "../share/card/card";
 import { useDashboard } from "./dashboard.hooks";
 import styles from "./dashboard.module.css";
 import AreaChart from "../share/chart/AreaCharts/areaCharts";
-
 import { Select } from "antd";
-import YearSelector from "../share/yearSelect/yearSelect";
 import AreaCarChart from "../share/chart/AreaCharts/areaChartsCar";
 import PeakTimeChart from "../share/chart/AreaCharts/areaChartsTime";
 import LoadingScreen from "../loadingScreen/loading";
+import StackedBarChart from "../share/chart/BarCharts/barCharts";
 
 const DashBoardPageContainer: React.FC = () => {
   const {
     handledMonth,
     handledYearChange,
     handledYearCarChange,
-    isDevice,
     year,
     yearCar,
     month,
@@ -24,6 +21,7 @@ const DashBoardPageContainer: React.FC = () => {
     graphCar,
     graphTime,
     loading,
+    summaryPackages,
   } = useDashboard();
   return (
     <div className={styles.wrapper}>
@@ -54,15 +52,7 @@ const DashBoardPageContainer: React.FC = () => {
         </div>
         <div className={styles.cards}>
           {cards.map((item) => (
-            <Card
-              item={item}
-              key={item.id}
-              className={
-                isDevice == DEVICE_TYPE.MOBILE
-                  ? styles["w-100"]
-                  : styles["w-25"]
-              }
-            />
+            <Card item={item} key={item.id} className={styles["w-100"]} />
           ))}
         </div>
       </div>
@@ -84,6 +74,9 @@ const DashBoardPageContainer: React.FC = () => {
           year={year}
           handleYearChange={handledYearChange}
         />
+      </div>
+      <div className={styles.chartContentTime}>
+        <StackedBarChart graph={summaryPackages} />
       </div>
       {loading && <LoadingScreen />}
     </div>

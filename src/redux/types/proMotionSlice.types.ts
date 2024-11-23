@@ -17,3 +17,5 @@ export interface PromotionState {
     updatedAt:string;
     packageType:string;
   }
+
+

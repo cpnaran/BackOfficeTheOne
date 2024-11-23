@@ -14,14 +14,13 @@ const PromotionContainer = () => {
     modalState,
     promotion,
     closeModal,
-    openModal,
     createPromotion,
     loading,
   } = usePromotion();
   return (
     <div className={styles.wrapper}>
       <div className={styles.select_container}>
-        <p>แพ็คแก็จทั้งหมด</p>
+        <p>แพ็คเกจทั้งหมด</p>
         <div
           onClick={() => {
             createPromotion();
@@ -30,7 +29,11 @@ const PromotionContainer = () => {
           <SvgIcon icon="plus" width={24} height={24} />
         </div>
       </div>
-      <DataTable values={packageTableData} columns={columns} />
+      <DataTable
+        values={packageTableData}
+        columns={columns}
+        columnPinning={{ left: [], right: ["action"] }}
+      />
 
       {isOpen && (
         <PromotionModal

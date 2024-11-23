@@ -1,6 +1,5 @@
 import { Form } from "formik";
 import {
-  CreatePromotionFormKeysProps,
   CreatePromotionFormProps,
 } from "./createPromotion.from.types";
 import Input from "@/components/share/input/input";
@@ -11,7 +10,6 @@ import CustomsSelect from "@/components/share/customSelect.tsx/customSelect";
 const CreatPromotionFrom = ({
   values,
   errors,
-  dirty,
   setFieldValue,
   touched,
   closeModal,
@@ -26,7 +24,7 @@ const CreatPromotionFrom = ({
           type="text"
           id="name"
           name="name"
-          placeholder="ชื่อแพ็คแก็จ"
+          placeholder="ชื่อแพ็คเกจ"
           className={styles.inputstyle}
         />
 

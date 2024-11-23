@@ -26,7 +26,12 @@ export const numberWithCommas = (number: number): string => {
 // format https://day.js.org/docs/en/display/format, https://day.js.org/docs/en/plugin/buddhist-era
 // BBBB thai year
 export function dateFormat(date: string | Date, format: string) {
-  return dayjs(date).locale("th").format(format);
+   if(dayjs(date).locale("th").format(format) === "Invalid Date"){
+    return "-"
+   }else{
+      return  dayjs(date).locale("th").format(format);
+   }
+ 
 }
 
 

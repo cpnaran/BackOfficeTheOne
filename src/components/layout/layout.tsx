@@ -1,6 +1,5 @@
 import { LayoutContainerProps } from "./layout.types";
 import styles from "./layout.module.css";
-import MainFooter from "../share/mainFooter/mainFooter";
 import { useLayout } from "./layout.hook";
 import SidebarMain from "../share/sideBar";
 import Header from "../share/header/header";
@@ -9,7 +8,11 @@ const Layout: React.FC<LayoutContainerProps> = ({ children }) => {
   return (
     <div className={styles.container}>
       <main>
-        {sidebar && <SidebarMain asPath={asPath} pathname={pathname} />}
+        {sidebar && (
+          <div className={styles.sidebar}>
+            <SidebarMain asPath={asPath} pathname={pathname} />
+          </div>
+        )}
         <div
           className={
             pathname == "/login" ? styles.contentLogin : styles.content

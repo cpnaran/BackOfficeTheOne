@@ -17,7 +17,7 @@ const PeakTimeChart = ({ graph }: GraphTimeContainerProps) => {
   // กำหนดข้อมูลสำหรับกราฟ
   const series = [
     {
-      name: "จำนวน รถ",
+      name: "ปริมาณการใช้รถ",
       data: [
         parseFloat(graph["00"]),
         parseFloat(graph["01"]),
@@ -80,6 +80,9 @@ const PeakTimeChart = ({ graph }: GraphTimeContainerProps) => {
         "24:00",
       ], // ตัวอย่างเวลาที่ต้องการ
     },
+    yaxis: {
+      show: false, // Hide y-axis
+    },
     title: {
       text: "Peak Time Analysis",
       align: "center",
@@ -87,7 +90,7 @@ const PeakTimeChart = ({ graph }: GraphTimeContainerProps) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerTime}>
       <ReactApexChart
         options={options}
         series={series}
