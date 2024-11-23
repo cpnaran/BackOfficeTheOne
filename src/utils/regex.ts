@@ -1,0 +1,1 @@
+export const PAGE_FORMAT_REGEX: RegExp = /^[0-9]*$/;

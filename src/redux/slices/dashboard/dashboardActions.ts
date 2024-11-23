@@ -98,7 +98,6 @@ export  const getTotalCar = (request: IncomeRequest, callback: (check:boolean) =
    export  const getTimeGraph = ( callback: (check:boolean) => void): AppThunk   =>
   async (dispatch) => {
     dispatch(graphPeaktimeStart());
-      console.log
     try {
     const response =  await api.get(
           `${apiBaseUrl}/back-office/Usage-Time`,

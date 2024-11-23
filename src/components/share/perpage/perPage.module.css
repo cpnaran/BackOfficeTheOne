@@ -1,0 +1,69 @@
+.container {
+  @apply relative flex items-center gap-3;
+}
+
+.container:hover {
+  @apply cursor-pointer;
+}
+
+.container > p {
+  color: var(--rvp-secondary-text-color);
+}
+
+.container > .arrow svg path {
+  stroke: var(--rvp-secondary-text-color);
+}
+
+.container > .arrow.rotation {
+  transform: rotate(180deg);
+}
+
+.container:hover .wrapper {
+  display: block;
+}
+
+.wrapper {
+  display: none;
+  top: 1rem;
+  padding-top: 1rem;
+  right: 0;
+  z-index: 2;
+  width: 150px;
+  @apply absolute;
+}
+
+.dropdown {
+  border: 1px solid var(--rvp-secondary-text-color);
+  background-color: var(--rvp-white-color);
+  overflow: hidden;
+  @apply rounded-lg;
+}
+
+.dropdown > li {
+  text-wrap: nowrap;
+  @apply flex items-center gap-3 p-3;
+}
+
+.dropdown > li:hover {
+  background-color: var(--rvp-background-color);
+  @apply cursor-pointer;
+}
+
+.dropdown > li .asc {
+  transform: rotate(180deg);
+}
+
+@media screen and (max-width: 767px) {
+  .container > p {
+    @apply text-sm;
+  }
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 3840px) {
+}

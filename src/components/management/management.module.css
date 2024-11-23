@@ -1,0 +1,37 @@
+.wrapper {
+    display: flex;
+    /* Use flexbox layout */
+    /* Allow items to wrap onto multiple lines */
+    gap: 24px;
+    /* Optional: Add space between cards */
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 150px;
+    flex-direction: column;
+  }
+
+  .search {
+    
+  }
+
+  .inputstyle {
+    width: 100%;
+    padding-top: 12px;
+}
+
+.container {
+  display: flex;
+flex-direction: column;
+gap: 24px;
+  justify-content: center;
+}
+
+.buttonSubmit {
+    max-width: 200px;
+    background-color: var(--sidbar-color);
+    color: var(--white-color);
+    @apply font-semibold text-lg py-4 px-5 rounded-lg text-center;
+    @apply w-full mx-auto;
+  }
