@@ -62,7 +62,9 @@ export const usePromotion = () => {
         packageType:
           e.packageType === "STANDARD"
             ? PACKAGE_TYPE.STANDARD
-            : PACKAGE_TYPE.PROMOTION,
+            : e.packageType === "PROMOTION"
+            ? PACKAGE_TYPE.PROMOTION
+            : PACKAGE_TYPE.PREMIUM,
       }));
     }
     return [];
