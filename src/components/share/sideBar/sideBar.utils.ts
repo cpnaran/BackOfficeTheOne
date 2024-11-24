@@ -9,6 +9,10 @@ export const LIST_MENU: MenuProps[] = [
     name: "Promotion",
     path: "/promotion",
   },
+  {
+    name: "Management",
+    path:"/management"
+  }
   
 
 ];

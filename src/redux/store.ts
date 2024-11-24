@@ -9,6 +9,7 @@ import layoutReducer from "./slices/layout/layoutSlice";
 import  promotionReducer from "./slices/promotion/proMotionSlice";
 import  dashboardReducer from "./slices/dashboard/dashboardSlice";
 import loginReducer from "./slices/login/loginSlice"
+import managementReducer from "./slices/management/managementSlice"
 import  packagesSummaryReducer from "./slices/packagesummary/packageSummarySlice"
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
        promotion:promotionReducer,
        dashboard:dashboardReducer,
        login:loginReducer,
+       management:managementReducer,
        packageSummary:packagesSummaryReducer
 
   },

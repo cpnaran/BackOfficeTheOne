@@ -1,4 +1,6 @@
+import ManagementContainer from "@/components/management";
+
 const ManagementPage: React.FC = () => {
-  return <div></div>;
+  return <ManagementContainer />;
 };
 export default ManagementPage;

@@ -1,0 +1,177 @@
+.inputstyle {
+  width: 100%;
+  padding-top: 12px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+.buttonSubmit {
+  max-width: 200px;
+  background-color: var(--sidbar-color);
+  color: var(--white-color);
+  @apply font-semibold text-lg py-4 px-5 rounded-lg text-center;
+  @apply w-full mx-auto;
+}
+
+ .action {
+   @apply relative flex justify-center items-center;
+ }
+
+
+ .container>.form>.content {
+
+   @apply w-full flex flex-wrap gap-y-6 gap-x-4 px-10 pt-6 pb-6;
+ }
+
+ .container>.form>.content>h2 {
+   color: var(--primary-color-1);
+   @apply w-full font-semibold text-lg text-center;
+ }
+
+ .container>.form>.content>h2+p {
+   color: var(--error-color-1);
+   margin-top: -1rem;
+   @apply w-full font-normal text-base text-center;
+ }
+
+ .container>.form>.content>.printing {
+   @apply w-full flex justify-end;
+ }
+
+ .container>.form>.content>.printing>button {
+   max-width: 238px;
+   @apply w-full;
+ }
+
+ /* ผลการค้นหา */
+ .container>.search>.content {
+
+   @apply w-full flex flex-wrap gap-4 px-10 pb-6;
+ }
+
+ .container>.search>.content>.sorting {
+   @apply w-full flex justify-between;
+ }
+
+ .container>.search>.content>p.total {
+   color: var(--secondary-text-color);
+   @apply w-full font-normal text-lg text-right;
+ }
+
+ .container>.search>.content.notFound {
+   height: 200px;
+   @apply flex justify-center items-center;
+ }
+
+ .container>.search>.content.notFound>p {
+   color: var(--secondary-text-color);
+   @apply text-center text-lg font-normal;
+ }
+
+ /* ผลการค้นหา */
+ .columnPin {
+   box-shadow: 1px 0 1px -1px gray inset;
+   right: 0px;
+   position: sticky;
+   min-width: 100px;
+   z-index: 1;
+   background-color: var(--white-color) !important;
+ }
+
+ /* Card List  */
+ .action>.dropdown {
+   position: absolute;
+   background-color: var(--sidbar-color);
+   border: 1px solid var(--secondary-text-color);
+   overflow: hidden;
+   z-index: 1;
+   right: 0;
+   bottom: 0;
+   display: none;
+   @apply rounded-xl;
+ }
+
+ .action:hover .dropdown {
+   display: flex;
+ }
+
+ .action>.dropdown>ul li {
+   text-wrap: nowrap;
+   @apply flex items-center gap-3 p-2 text-base font-normal;
+ }
+
+ .action>.dropdown>ul li:hover {
+   background-color: var(--sidbar-color);
+   @apply cursor-pointer;
+ }
+
+ .action>.dropdown>ul li[aria-disabled="true"] {
+   color: var(--secondary-text-color);
+   @apply cursor-not-allowed;
+ }
+
+ /* Card List  */
+
+ 
+
+ .tdTable {
+   color: var(--primary-color-7) !important;
+ }
+
+ .w-25 {
+   width: calc(100% / 4 - 3rem / 4) !important;
+ }
+
+ .w-30 {
+   width: calc(100% / 3 - 2rem / 3) !important;
+ }
+
+ .w-40 {
+   width: calc(40% - 0.5rem) !important;
+ }
+
+ .w-50 {
+   width: calc(50% - 0.5rem) !important;
+ }
+
+ .w-60 {
+   width: calc(60% - 0.5rem) !important;
+ }
+
+ .w-100 {
+   width: calc(100% - 0rem) !important;
+ }
+
+ @media screen and (max-width: 767px) {
+   .container>.form>.content {
+     @apply p-6;
+   }
+
+   .container>.form>.content>.printing {
+     @apply justify-center;
+   }
+
+   .container>.search>.content {
+     @apply p-6;
+   }
+
+   .container>.search>.content.notFound>p {
+     @apply text-sm;
+   }
+ }
+
+ @media screen and (min-width: 768px) {}
+
+ /* DESKTOP */
+ @media screen and (min-width: 1024px) {
+   .container>.search>.content .table {
+     @apply flex justify-center;
+   }
+ }
+
+ @media screen and (min-width: 3840px) {}

@@ -22,6 +22,7 @@ export interface DeletePromotionRequest {
 export enum PACKAGE_TYPE {
   STANDARD = "STANDARD",
   PROMOTION = "PROMOTION",
+  PREMIUM  ="PREMIUM"
 }
 
 

@@ -1,0 +1,48 @@
+.container {
+  background-color: var(--background-color-2);
+  @apply flex flex-col items-center gap-y-6 py-10 px-8;
+}
+
+.buttonSubmit {
+  max-width: 200px;
+  background-color: var(--sidbar-color);
+  color: var(--secondary-text-color);
+  @apply font-semibold text-lg py-4 px-5 rounded-lg text-center;
+  @apply w-full mx-auto;
+}
+
+.buttonClose {
+  max-width: 200px;
+  background-color: var(--white-color);
+  color: var(--text-color);
+  @apply font-semibold text-lg py-4 px-5 rounded-lg text-center;
+  @apply w-full mx-auto;
+}
+
+.container > h1 {
+  color: var(--sidbar-color);
+  font-size: 20px !important;
+  @apply font-semibold text-base;
+}
+
+.button_div {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.container > section {
+  width: 100%;
+  padding: 24px;
+}
+
+.inputstyle {
+  width: 100%;
+  padding-top: 12px;
+}
+
+.date_picker {
+  padding-top: 12px;
+}

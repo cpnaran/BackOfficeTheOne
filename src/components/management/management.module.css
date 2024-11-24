@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  /* Use flexbox layout */
+  /* Allow items to wrap onto multiple lines */
+  gap: 24px;
+  /* Optional: Add space between cards */
+  justify-content: center;
+  margin-top: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 150px;
+  flex-direction: column;
+}
+
+.wrapper > h1 {
+  color: var(--sidbar-color);
+    font-size: 20px !important;
+    @apply font-semibold text-base;
+}

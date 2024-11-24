@@ -1,0 +1,63 @@
+.container {
+  @apply w-full flex flex-col items-end gap-8 my-4;
+}
+
+.container > p {
+  color: var(--secondary-text-color);
+  @apply text-base font-normal;
+}
+
+.container > .wrapper {
+  @apply flex items-center gap-3;
+}
+
+.container > .wrapper input.page {
+  max-width: 48px;
+  @apply text-center;
+}
+
+.container > .wrapper input.page {
+  @apply px-3;
+}
+
+.container > .wrapper input.page:disabled {
+  background-color: var(--white-color);
+}
+
+.container > .wrapper > div {
+  @apply flex items-center gap-1;
+}
+
+.container > .wrapper button.prev,
+.container > .wrapper button.next {
+  @apply p-3 rounded-md;
+}
+
+.container > .wrapper button.prev:disabled,
+.container > .wrapper button.next:disabled {
+  background-color: var(--secondary-text-color);
+}
+
+@media screen and (max-width: 767px) {
+  .container > p {
+    @apply text-sm;
+  }
+
+  .container > .wrapper > p {
+    @apply text-sm;
+  }
+
+  .container > .wrapper button.prev,
+  .container > .wrapper button.next {
+    @apply p-2;
+  }
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 3840px) {
+}
