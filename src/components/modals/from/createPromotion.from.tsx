@@ -1,7 +1,5 @@
 import { Form } from "formik";
-import {
-  CreatePromotionFormProps,
-} from "./createPromotion.from.types";
+import { CreatePromotionFormProps } from "./createPromotion.from.types";
 import Input from "@/components/share/input/input";
 import styles from "./createPromotion.from.module.css";
 import DatePicker from "antd/es/date-picker";
@@ -52,6 +50,7 @@ const CreatPromotionFrom = ({
           options={[
             { value: "STANDARD", label: "แพ็คเกจทั่วไป" },
             { value: "PROMOTION", label: "แพ็คเกจโปรโมชั่น" },
+            { value: "PREMIUM", label: "แพ็คเกจพรีเมี่ยม" },
           ]}
           className={styles.inputstyle}
         />
