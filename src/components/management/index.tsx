@@ -9,22 +9,12 @@ import PerPage from "../share/perpage/perPage";
 import DataTable from "../share/dataTable/dataTable";
 import ResultCardPage from "../share/resultCardPage/resultCardPage";
 import { useManagement } from "./management.hooks";
+import ManagementFrom from "./management.from";
 
-const ManagementContainer = () => {
-    const {
-       
-        onChangePage,
-        handleOnBlurCardPage,
-        handleChangePerPage,
-        handleChangeOrder,
-        isModalOpen,
-        closeModal,
-      } = useManagement({
-        props.values,
-        setFieldValue,
-      });
+const ManagementContainer: React.FC = () => {
   return (
     <div className={styles.wrapper}>
+      <h1>จัดการผู้ใช้งาน</h1>
       <div className={styles.search}>
         <Formik
           enableReinitialize
@@ -33,54 +23,7 @@ const ManagementContainer = () => {
           onSubmit={() => {}}
         >
           {(props: FormikProps<ManagementFormKeysProps>) => {
-            return (
-              <Form className={styles.container}>
-                <Input
-                  type="string"
-                  name="licensePlate"
-                  placeholder="ค้นหา"
-                  className={styles.inputstyle}
-                  label={""}
-                />
-                <button className={styles.buttonSubmit} type="submit">
-                  ค้นหา
-                </button>
-                <section className={styles.search}>
-          {salesReport && salesReport && salesReport.length > 0 ? (
-            <div className={styles.content}>
-              <div id="แถบตัวเลือก" className={styles.sorting}>
-                <PerPage
-                  perPage={props.values.perPage}
-                  handleClick={(e) => {
-                    // handleChangePerPage(e);
-                  }}
-                />
-              </div>
-              <DataTable
-                values={searchValues}
-                columns={columns}
-                columnPinning={{ left: [], right: ["action"] }}
-              />
-              <ResultCardPage
-                onClickPreviousPage={() => onChangePage(props.values.page - 1)}
-                onClickNextPage={() => onChangePage(props.values.page + 1)}
-                onChange={({ name, value }) => props.setFieldValue(name, value)}
-                onBlur={(page) => handleOnBlurCardPage(page)}
-                page={props.values.page}
-                totalPage={totalPages}
-                totalCount={totalCount}
-                perPage={props.values.perPage}
-              />
-            </div>
-          ) : (
-            <div className={cx(styles.content, styles.notFound)}>
-              <p>ไม่พบข้อมูลที่ท่านกำลังค้นหา</p>
-            </div>
-          )}
-        </section>
-              </Form>
-              
-            );
+            return <ManagementFrom {...props} />;
           }}
         </Formik>
       </div>

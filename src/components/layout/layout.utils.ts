@@ -1,5 +1,6 @@
 export const includePaths: string[] = [
   "/login",
   "/dashborad",
-  "/promotion"
+  "/promotion",
+  "/management"
 ];

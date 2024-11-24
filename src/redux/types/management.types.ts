@@ -1,9 +1,15 @@
+import { isAction } from "@reduxjs/toolkit";
+import { PACKAGE_TYPE } from "../slices/promotion/proMotion.utils";
+
 export interface ManagementState {
   error: string | null;
   loading: boolean;
   page: number;
   per_page: number;
   carList: CarList[];
+  option:OptionPromotion[]
+  totalCount: number,
+  totalPage: number
 }
 
 export interface PromoteRequest {
@@ -20,7 +26,9 @@ export interface AddDayRequest {
 }
 
 export interface CarListRespone {
-  carList: CarList[];
+ data: CarList[];
+   totalCount: number,
+  totalPage: number
 }
 
 
@@ -33,12 +41,15 @@ export interface CarListRequest {
 export interface CarList {
   id: string;
   userId: string;
+  fullName:string;
   license: string;
   status: boolean;
+  startAt: string;
+  isActive:boolean,
   expiredAt: string;
   createdAt: string;
   updateAt: string;
-  JsonData: SpecialPackage[];
+  jsonData: SpecialPackage[];
 }
 
 export interface SpecialPackage {
@@ -47,7 +58,39 @@ export interface SpecialPackage {
   amount: number;
   package: string;
   startAt: string;
-  isActive: number;
+  isActive: boolean;
   expiredAt: string;
   packageType: string;
+}
+
+
+
+
+
+
+export interface OptionPromotion {
+  id:string,
+  package:string,
+  amount:number,
+  days:number,
+  isActive:boolean,
+  startAt:string,
+  expiredAt:string,
+  createdAt:string,
+  updatedAt:String,
+  packageType:PACKAGE_TYPE
+}
+
+export interface ManagementTableColumns {
+  index?: number;
+  id: string;
+  fullName:string;
+  userId:string;
+  license:string;
+  status:boolean;
+  isActive: boolean;
+  startAt: string;
+  expiredAt: string;
+  jsonData?: SpecialPackage[];
+  action?: string;
 }
