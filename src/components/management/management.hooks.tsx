@@ -9,6 +9,7 @@ import useModal from "@/hooks/useModal";
 import { useSelector } from "react-redux";
 import {
   addDay,
+  addThirtyDay,
   demote,
   getCarList,
   getOptionPremium,
@@ -125,14 +126,48 @@ export const useManagement = ({
     }));
     return modifiedOptions;
   }, [optionPromotion]);
+
   const handleAdd = (id: string) => {
     const request: AddDayRequest = {
       id: id,
+      day: 15,
     };
     dispatch(
       addDay(request, (check) => {
         if (check) {
           toast.success("เพิ่ม 15 วัน เรียบร้อย", {
+            position: "top-right", // You can change position as needed
+            autoClose: 5000, // Auto close after 5 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          onSearch(values);
+        } else {
+          toast.error("เกิดข้อผิดพลาด", {
+            position: "top-right", // You can change position as needed
+            autoClose: 5000, // Auto close after 5 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+    );
+  };
+  const handleAddThirtyDay = (id: string) => {
+    const request: AddDayRequest = {
+      id: id,
+      day: 30,
+    };
+    dispatch(
+      addThirtyDay(request, (check) => {
+        if (check) {
+          toast.success("เพิ่ม 30 วัน เรียบร้อย", {
             position: "top-right", // You can change position as needed
             autoClose: 5000, // Auto close after 5 seconds
             hideProgressBar: false,
@@ -266,6 +301,14 @@ export const useManagement = ({
                   เพิ่มฟรี 15 วัน
                 </Menu.Item>
                 <Menu.Item
+                  key="add"
+                  onClick={() => {
+                    handleAddThirtyDay(info.row.original.id);
+                  }}
+                >
+                  เพิ่มฟรี 30 วัน
+                </Menu.Item>
+                <Menu.Item
                   key="update"
                   onClick={() => {
                     const data: ManagementType = {
@@ -290,7 +333,14 @@ export const useManagement = ({
                 >
                   เพิ่มฟรี 15 วัน
                 </Menu.Item>
-
+                <Menu.Item
+                  key="add"
+                  onClick={() => {
+                    handleAddThirtyDay(info.row.original.id);
+                  }}
+                >
+                  เพิ่มฟรี 30 วัน
+                </Menu.Item>
                 <Menu.Item
                   key="demote"
                   onClick={() => {

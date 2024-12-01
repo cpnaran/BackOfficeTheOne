@@ -23,6 +23,7 @@ export interface DemoteRequest {
 
 export interface AddDayRequest {
   id: string;
+  day:number;
 }
 
 export interface CarListRespone {

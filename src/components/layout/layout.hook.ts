@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch} from "@/redux/store";
 import session from "@/utils/session";
 import { includePaths } from "./layout.utils";
+import { clearError } from "@/redux/slices/error/errorSlice";
 // import { setLayout } from "@/redux/slices/layout/layoutSlice";
 
 export const useLayout = () => {
@@ -40,12 +41,12 @@ export const useLayout = () => {
 
    useEffect(() => {
     if (
-      error &&
-      error.code &&
-      error.code === "UNAUTHORIZED" 
+      error.message === "Access denied. No token provided." 
       
     ) {
-        router.replace({ pathname: "/login" });
+       session.clearLogout();
+         router.replace({ pathname: "/login" });
+         dispatch(clearError());
     }
   }, [error, dispatch]);
 

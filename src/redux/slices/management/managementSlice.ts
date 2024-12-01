@@ -1,74 +1,90 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./management.utils";
-import {  CarListRespone, OptionPromotion } from "@/redux/types/management.types";
+import {
+  CarListRespone,
+  OptionPromotion,
+} from "@/redux/types/management.types";
 import { getOptionPremium } from "./managementActions";
 
 const managementSlice = createSlice({
-  name:"management",
+  name: "management",
   initialState,
-  reducers:{
+  reducers: {
     promoteStart: (state) => {
       state.loading = true;
       state.error = null;
     },
     promoteSuccess: (state) => {
-      state.loading = false
+      state.loading = false;
     },
     promoteFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload || "An error occurred.";
     },
-    demoteStart:(state) =>{
-      state.loading =true;
-      state.error =null;
+    demoteStart: (state) => {
+      state.loading = true;
+      state.error = null;
     },
     demoteSuccess: (state) => {
-      state.loading = false
+      state.loading = false;
     },
-    demoteFailure:(state,action: PayloadAction<string>) => {
+    demoteFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload || "An error occurred.";
     },
-    addDayStart:(state)=>{
+    addDayStart: (state) => {
       state.loading = true;
       state.error = null;
     },
     addDaySuccess: (state) => {
-      state.loading = false
+      state.loading = false;
     },
-    addDayFailure:(state,action: PayloadAction<string>) => {
+    addDayFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload || "An error occurred.";
     },
-    getCarListStart:(state) => {
-      state.loading =true;
-      state.error =null
-    },
-    getCarListSuccess: (state,action: PayloadAction<CarListRespone>) =>{
-      state.loading = false;
-      state.carList =action.payload.data
-      state.totalCount = action.payload.totalCount
-      state.totalPage =action.payload.totalPage
-
-    },
-    getCarListFailure:(state,action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload || "An error occurred.";
-    },
-      getOptionPremiumStart:(state)=>{
+    getCarListStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    getOptionPremiumSuccess: (state,action: PayloadAction<OptionPromotion[]>) => {
+    getCarListSuccess: (state, action: PayloadAction<CarListRespone>) => {
       state.loading = false;
-      state.option = action.payload
+      state.carList = action.payload.data;
+      state.totalCount = action.payload.totalCount;
+      state.totalPage = action.payload.totalPage;
     },
-    getOptionPremiumFailure:(state,action: PayloadAction<string>) => {
+    getCarListFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload || "An error occurred.";
     },
-  }
-   
+    getOptionPremiumStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    getOptionPremiumSuccess: (
+      state,
+      action: PayloadAction<OptionPromotion[]>
+    ) => {
+      state.loading = false;
+      state.option = action.payload;
+    },
+    getOptionPremiumFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload || "An error occurred.";
+    },
+
+    addDayThirtyStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    addDayThirtySuccess: (state) => {
+      state.loading = false;
+    },
+    addDayThirtyFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload || "An error occurred.";
+    },
+  },
 });
 
 export const {
@@ -86,8 +102,10 @@ export const {
   getCarListFailure,
   getOptionPremiumStart,
   getOptionPremiumSuccess,
-  getOptionPremiumFailure
-
+  getOptionPremiumFailure,
+  addDayThirtyStart,
+  addDayThirtySuccess,
+  addDayThirtyFailure,
 } = managementSlice.actions;
 
 export default managementSlice.reducer;
