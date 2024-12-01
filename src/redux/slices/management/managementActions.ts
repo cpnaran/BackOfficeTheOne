@@ -10,6 +10,9 @@ import {
   addDayFailure,
   addDayStart,
   addDaySuccess,
+  addDayThirtyFailure,
+  addDayThirtyStart,
+  addDayThirtySuccess,
   demoteFailure,
   demoteStart,
   demoteSuccess,
@@ -73,6 +76,24 @@ export const addDay =
         error.response?.data?.message || "An error occurred.";
       console.error(error);
       dispatch(addDayFailure(errorMessage));
+      callback(false);
+    }
+  };
+
+
+  export const addThirtyDay =
+  (request: AddDayRequest, callback: (check: boolean) => void): AppThunk =>
+  async (dispatch) => {
+    dispatch(addDayThirtyStart());
+    try {
+      await api.put(`${apiBaseUrl}/back-office/Car/Add-days`, request);
+      dispatch(addDayThirtySuccess());
+      callback(true);
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "An error occurred.";
+      console.error(error);
+      dispatch(addDayThirtyFailure(errorMessage));
       callback(false);
     }
   };
