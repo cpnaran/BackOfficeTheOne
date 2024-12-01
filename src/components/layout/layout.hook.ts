@@ -14,6 +14,7 @@ export const useLayout = () => {
   const header = useSelector((state: RootState) => state.layout.header);
   const footer = useSelector((state: RootState) => state.layout.footer);
   const sidebar = useSelector((state: RootState) => state.layout.sidebar);
+  const error = useSelector((state:RootState) => state.error)
   const { pathname, asPath,locale, query } = router;
 
    const token =useSelector((state: RootState) => state.login.token);
@@ -37,7 +38,16 @@ export const useLayout = () => {
 
 
 
-   
+   useEffect(() => {
+    if (
+      error &&
+      error.code &&
+      error.code === "UNAUTHORIZED" 
+      
+    ) {
+        router.replace({ pathname: "/login" });
+    }
+  }, [error, dispatch]);
 
   return {
     header,

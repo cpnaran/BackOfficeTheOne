@@ -10,9 +10,17 @@ import axios, {
 import { camelizeKeys, snakeCaseKeys } from "./api.utils";
 import session from "@/utils/session";
 import { jwtDecode } from "jwt-decode";
-import { useAppDispatch } from "@/redux/store";
+import store, { useAppDispatch } from "@/redux/store";
 import { refreshAccessToken } from "@/redux/slices/login/loginActions";
+import { setError } from "@/redux/slices/error/errorSlice";
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+interface ErrorResponse {
+  message: string;
+  statusCode: number;
+  code: string;
+}
+
 
 class ApiClient {
   private http: AxiosInstance;
@@ -35,27 +43,23 @@ class ApiClient {
 
     this.http.interceptors.request.use(
       async (config) => {
-
-        if (
-          config.url &&
-          
-          (config.url.includes("/Login/refresh") )
-        ) {
-          let refreshToken = session.getKeyStorage("refresh_token")
-           config.headers.Authorization = ` ${refreshToken}`;
+        if (config.url && config.url.includes("/Login/refresh")) {
+          let refreshToken = session.getKeyStorage("refresh_token");
+          config.headers.Authorization = ` ${refreshToken}`;
           return config;
         }
         const savedUser = session.getKeyStorage("user");
         let accessToken = session.getKeyStorage("accessToken");
-       
 
-         
         if (accessToken) {
           const decodedToken = jwtDecode(accessToken);
-          const currentTime = Date.now() / 1000; // แปลงเวลาเป็นหน่วยวินาที
-          if (decodedToken.exp && decodedToken.exp > currentTime) {
+          const currentTime = Date.now() / 1000;
+
+          const bufferTime = 5 * 60;
+
+          if (decodedToken.exp && decodedToken.exp < currentTime + bufferTime) {
             try {
-              accessToken =  await refreshAccessToken()  as string;
+              accessToken = (await refreshAccessToken()) as string;
             } catch (error) {
               session.clearLogout();
               return Promise.reject(error);
@@ -163,10 +167,12 @@ class ApiClient {
   }
   private handleError(error: AxiosError) {
     // Handle error response here
-    const { response } = error;
+    const { response,config } = error;
+        const url = config?.url || null;
     if (response) {
-      const { code, message, statusCode }: any = response.data;
-      if (message === "Unauthorized" || statusCode === 401)
+   const { code, message } = response.data as ErrorResponse;
+       store.dispatch(setError({ code, message, url }));
+      if (message === "Unauthorized")
         return this.onUnauthorized(error);
       else if (code === "not_found") return this.onNotFound(error);
       else if (code === "server_error") return this.onServerError(error);

@@ -11,6 +11,9 @@ import  dashboardReducer from "./slices/dashboard/dashboardSlice";
 import loginReducer from "./slices/login/loginSlice"
 import managementReducer from "./slices/management/managementSlice"
 import  packagesSummaryReducer from "./slices/packagesummary/packageSummarySlice"
+import errorReducer from "./slices/error/errorSlice";
+
+
 const store = configureStore({
   reducer: {
        layout: layoutReducer,
@@ -18,8 +21,8 @@ const store = configureStore({
        dashboard:dashboardReducer,
        login:loginReducer,
        management:managementReducer,
-       packageSummary:packagesSummaryReducer
-
+       packageSummary:packagesSummaryReducer,
+       error:errorReducer
   },
 });
 
