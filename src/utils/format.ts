@@ -36,7 +36,7 @@ export function dateFormat(date: string | Date, format: string) {
 
 
 export const dateStringShortFormat = (date: Date, locale = "th"): string => {
-  return date.toLocaleDateString(locale, {
+  return date?.toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
