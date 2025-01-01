@@ -5,6 +5,7 @@ import styles from "./createPromotion.from.module.css";
 import DatePicker from "antd/es/date-picker";
 import moment from "moment";
 import CustomsSelect from "@/components/share/customSelect.tsx/customSelect";
+import dayjs from "dayjs";
 const CreatPromotionFrom = ({
   values,
   errors,
@@ -58,11 +59,13 @@ const CreatPromotionFrom = ({
           <label>เริ่มวันที่</label>
           <DatePicker
             onFocus={(e) => e.target.blur()}
-            value={values.startAt ? moment(values.startAt) : null}
-            onChange={(date) =>
-              setFieldValue("startAt", date ? date.toISOString() : null)
+            value={values.startAt ? dayjs(values.startAt) : null}
+            onChange={
+              (date) =>
+                setFieldValue("startAt", date ? date.toISOString() : null) // Convert back to ISO
             }
             style={{ width: "100%" }}
+            readOnly
           />
           {errors.startAt && touched.startAt ? (
             <div style={{ color: "red" }}>{errors.startAt}</div>
@@ -73,9 +76,10 @@ const CreatPromotionFrom = ({
           <label>สิ้นสุดวันที่</label>
           <DatePicker
             onFocus={(e) => e.target.blur()}
-            value={values.expiredAt ? moment(values.expiredAt) : null}
-            onChange={(date) =>
-              setFieldValue("expiredAt", date ? date.toISOString() : null)
+            value={values.expiredAt ? dayjs(values.expiredAt) : null}
+            onChange={
+              (date) =>
+                setFieldValue("expiredAt", date ? date.toISOString() : null) // Convert back to ISO
             }
             style={{ width: "100%" }}
             readOnly
