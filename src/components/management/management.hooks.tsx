@@ -32,6 +32,7 @@ import styles from "./management.from.module.css";
 import { setLayout } from "@/redux/slices/layout/layoutSlice";
 import { toast } from "react-toastify";
 import { ManagementType } from "../modals/management/managementModal.types";
+import Status from "../share/status/status";
 
 export const useManagement = ({
   values,
@@ -60,20 +61,29 @@ export const useManagement = ({
   );
   const columnValues: ManagementTableColumns[] = useMemo(() => {
     if (managementPackageTable) {
-      return managementPackageTable.map((e, index) => {
-        return {
-          index: index,
-          id: e.id,
-          fullName: e.fullName,
-          userId: e.userId,
-          license: e.license,
-          status: e.status,
-          startAt: e.startAt,
-          expiredAt: e.expiredAt,
-          jsonData: e.jsonData,
-          isActive: e.isActive,
-        };
-      });
+      return managementPackageTable
+        .map((e, index) => {
+          const isOutOfDate = new Date(e.expiredAt) < new Date();
+          console.log("isOutOfDate", isOutOfDate);
+          console.log("new Date(e.expiredAt)", new Date(e.expiredAt));
+          return {
+            index: index,
+            id: e.id,
+            fullName: e.fullName,
+            userId: e.userId,
+            license: e.license,
+            status: e.status,
+            createdAt: e.createdAt,
+            expiredAt: e.expiredAt,
+            jsonData: e.jsonData,
+            outOfDate: isOutOfDate,
+            isActive: e.isActive,
+          };
+        })
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
     } else {
       return [];
     }
@@ -275,7 +285,7 @@ export const useManagement = ({
             ? "ลูกค้ารายเดือน"
             : "ลูกค้ารายปี",
       }),
-      columnHelper.accessor("startAt", {
+      columnHelper.accessor("createdAt", {
         header: "วันเริ่ม",
         size: 100,
         cell: (info) => dateFormat(info.renderValue() || "", "DD/MM/BBBB"),
@@ -284,6 +294,24 @@ export const useManagement = ({
         header: "วันสิ้นสุด",
         size: 100,
         cell: (info) => dateFormat(info.renderValue() || "", "DD/MM/BBBB"),
+      }),
+      columnHelper.accessor("outOfDate", {
+        header: "สถานะ",
+        size: 100,
+        cell: (info) => (
+          <Status
+            className={styles.status}
+            values={[
+              {
+                value: info.renderValue() ? "หมดอายุ" : "ปกติ",
+                color: info.renderValue() ? "red" : "green",
+              },
+            ]}
+          />
+        ),
+        meta: {
+          cellAlign: "center",
+        },
       }),
 
       columnHelper.accessor("action", {

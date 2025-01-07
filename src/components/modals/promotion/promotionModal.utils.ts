@@ -4,7 +4,9 @@ import { CreatePromotionFormKeysProps, CreatePromotionFormProps } from "../from/
 export enum PROMOTION_MODAL_STATE {
    EDIT ="EDIT",
    CREATE="CREATE",
-   DELETE ="DELETE"
+   DELETE ="DELETE",
+   UPDATE ="UPDATE"
+
   }
   
 

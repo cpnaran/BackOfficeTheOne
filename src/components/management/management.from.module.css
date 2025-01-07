@@ -117,7 +117,9 @@
 
  /* Card List  */
 
- 
+ .status {
+   @apply flex justify-center items-center !important;
+ }
 
  .tdTable {
    color: var(--primary-color-7) !important;

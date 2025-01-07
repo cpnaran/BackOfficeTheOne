@@ -18,6 +18,7 @@ import {
   CreatePromotionRequest,
   DeletePromotionRequest,
   EditCreatePromotionRequest,
+  UpdatePromotionRequest,
 } from "./proMotion.utils";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -88,6 +89,30 @@ export const deletePackage =
   export const editPackage =
   (
     request: EditCreatePromotionRequest,
+    callback: (check: boolean) => void
+  ): AppThunk =>
+  async (dispatch) => {
+    dispatch( updatePackageStart());
+    try {
+     await api.put(
+        `${apiBaseUrl}/back-office/update-package`,
+        request
+      );
+      dispatch(updatePackageSuccess());
+      callback(true);
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "An error occurred.";
+      console.error(error);
+      dispatch(updatePackageFailure(errorMessage));
+      callback(false);
+    }
+  };
+
+  
+  export const updatePackage =
+  (
+    request: UpdatePromotionRequest,
     callback: (check: boolean) => void
   ): AppThunk =>
   async (dispatch) => {
