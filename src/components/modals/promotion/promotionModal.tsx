@@ -20,6 +20,7 @@ const PromotionModal = ({
     handleAddPromotion,
     handleDelete,
     handleEdit,
+    handleUpdate,
   } = usePromotionModal({ promotion }, { closeModal });
   switch (status) {
     case PROMOTION_MODAL_STATE.CREATE:
@@ -87,6 +88,39 @@ const PromotionModal = ({
                 type="button"
                 className={styles.buttonSubmit}
                 onClick={handleDelete}
+              >
+                ตกลง
+              </button>
+              <button
+                type="button"
+                className={styles.buttonClose}
+                onClick={closeModal}
+              >
+                ยกเลิก
+              </button>
+            </div>
+          </div>
+        </ModalComponent>
+      );
+    case PROMOTION_MODAL_STATE.UPDATE:
+      return (
+        <ModalComponent
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          maxWidth={412}
+        >
+          <div className={styles.container}>
+            <h1>ปรับสถานะ</h1>
+            <p>
+              ต้องการปรับสถานะของแพ็คเกจ
+              <br />
+              {name} หรือไม่
+            </p>
+            <div>
+              <button
+                type="button"
+                className={styles.buttonSubmit}
+                onClick={handleUpdate}
               >
                 ตกลง
               </button>

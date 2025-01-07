@@ -7,11 +7,13 @@ import {
   deletePackage,
   editPackage,
   getProMotionTable,
+  updatePackage,
 } from "@/redux/slices/promotion/proMotionActions";
 import {
   CreatePromotionRequest,
   DeletePromotionRequest,
   EditCreatePromotionRequest,
+  UpdatePromotionRequest,
 } from "@/redux/slices/promotion/proMotion.utils";
 import { toast } from "react-toastify";
 
@@ -141,11 +143,45 @@ export const usePromotionModal = (
       })
     );
   };
+ const handleUpdate = () => {
+    const request: UpdatePromotionRequest  = {
+      id:promotion.id,
+      isActive: !promotion.isActive,
+    };
+    dispatch(
+     updatePackage(request, (check) => {
+        if (check) {
+            closeModal();
+            dispatch(getProMotionTable(() => {}));
+            toast.success("Update แพ็คเก็จเรียบร้อย", {
+            position: "top-right", // You can change position as needed
+            autoClose: 5000, // Auto close after 5 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }else {
+            toast.error("เกิดข้อผิดพลาด", {
+            position: "top-right", // You can change position as needed
+            autoClose: 5000, // Auto close after 5 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+    );
+  };
 
   return {
     promotionInitialValues,
     handleAddPromotion,
     handleDelete,
     handleEdit,
+     handleUpdate
   };
 };

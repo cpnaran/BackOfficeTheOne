@@ -55,6 +55,7 @@ const CreatPromotionFrom = ({
           ]}
           className={styles.inputstyle}
         />
+
         <div className={styles.date_picker}>
           <label>เริ่มวันที่</label>
           <DatePicker

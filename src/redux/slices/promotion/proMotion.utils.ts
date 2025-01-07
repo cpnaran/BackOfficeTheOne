@@ -37,3 +37,9 @@ export interface EditCreatePromotionRequest {
   packageType: string;
    isActive:boolean
 }
+
+
+export interface UpdatePromotionRequest {
+   id:string;
+   isActive:boolean
+}

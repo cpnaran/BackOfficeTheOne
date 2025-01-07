@@ -157,6 +157,20 @@ export const usePromotion = () => {
               >
                 แก้ไขแพ็คแกจ
               </Menu.Item>
+
+              <Menu.Item
+                key="update"
+                onClick={() =>
+                  handleMenuClick(
+                    info.row.original,
+                    PROMOTION_MODAL_STATE.UPDATE
+                  )
+                }
+              >
+                {info.row.original.isActive
+                  ? "ปรับสถานะเป็นไม่ใช้งาน"
+                  : "ปรับสถานะเป็นใช้งาน"}
+              </Menu.Item>
               <Menu.Item
                 key="delete"
                 onClick={() =>

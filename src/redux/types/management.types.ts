@@ -90,8 +90,9 @@ export interface ManagementTableColumns {
   license:string;
   status:boolean;
   isActive: boolean;
-  startAt: string;
+  createdAt: string;
   expiredAt: string;
   jsonData?: SpecialPackage[];
+  outOfDate:boolean;
   action?: string;
 }
